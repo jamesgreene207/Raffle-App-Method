@@ -53,20 +53,19 @@ namespace ConsoleUI
                 name = GetUserInput("Please enter your name.");
                 raffleNumber = GenerateRandomNumber(min, max);
     
+                while (String.IsNullOrEmpty(name))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    name = GetUserInput("Please enter your name.");
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+                    while (guests.ContainsKey(raffleNumber))
+                {
+                    raffleNumber = GenerateRandomNumber(min, max);
+                }
 
-            while (String.IsNullOrEmpty(name))
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                name = GetUserInput("Please enter your name.");
-                Console.ForegroundColor = ConsoleColor.White;
-            }
-             while (guests.ContainsKey(raffleNumber))
-            {
-                raffleNumber = GenerateRandomNumber(min, max);
-            }
-
-            AddGuestsInRaffle(raffleNumber, name);
-            otherGuest = GetUserInput("Do you want to add another name? ").ToLower();
+                AddGuestsInRaffle(raffleNumber, name);
+                otherGuest = GetUserInput("Do you want to add another name? ").ToLower();
 
             } while (otherGuest == "yes" || otherGuest != "");
 
